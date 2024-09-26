@@ -34,7 +34,6 @@ public class FindElementDemo {
         driver.get("https://habr.com/ru");
 
         // получаем только id элемента
-
         WebElement logo = driver.findElement(By.cssSelector(".tm-header__logo"));
         assertNotNull(logo);
     }
