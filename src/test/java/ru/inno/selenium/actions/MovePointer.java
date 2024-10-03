@@ -3,10 +3,8 @@ package ru.inno.selenium.actions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -38,7 +36,7 @@ public class MovePointer {
 
         for (int i = 0; i < 10; i++) {
             new Actions(driver)
-                    .moveToLocation(50+i*10, 650+2*i).pause(50L).perform();
+                    .moveToLocation(50 + i * 10, 650 + 2 * i).pause(50L).perform();
         }
 
 
