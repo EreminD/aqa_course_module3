@@ -10,8 +10,6 @@ import ru.inno.selenium.page_object.page.MainPage;
 import ru.inno.selenium.page_object.page.SearchResultPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 @ExtendWith(MainPageResolver.class)
 @ExtendWith(SearchResultPageResolver.class)
@@ -19,16 +17,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LabirintTest {
 
 
+    // наследование vs композиции
     @Test
     public void addBooks(MainPage mainPage, SearchResultPage searchResultPage, CartPage cartPage) {
         mainPage.open();
 
-        mainPage.searchFor("Java");
+        mainPage.header.searchFor("Java");
         searchResultPage.addBooksToCart(5);
-        searchResultPage.goToCart();
+        searchResultPage.header.goToCart();
 
         cartPage.checkBooksInCartNumberShouldBe(5);
         cartPage.checkIconCounterShouldBe("5");
+
+        cartPage.header.searchFor("JavaScript");
 
 //        assertEquals(5, cartPage.countBooksInCart());
     }
@@ -36,7 +37,7 @@ public class LabirintTest {
     @Test
     public void emptySearch(MainPage mainPage, SearchResultPage searchResultPage) {
         mainPage.open();
-        mainPage.searchFor("вапвроплроавыпинртивапиваип");
+        mainPage.header.searchFor("вапвроплроавыпинртивапиваип");
 
         assertEquals("Мы ничего не нашли по вашему запросу! Что делать?", searchResultPage.getErrorText());
     }

@@ -10,12 +10,15 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CartPage {
+
     private final WebDriver driver;
+    public final HeaderElement header;
     private final By cartIcon = By.cssSelector(".b-header-b-personal-e-icon-count-m-cart");
     private final By cartItemsLocator = By.cssSelector(".main_order-container div.need-watch");
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
+        this.header = new HeaderElement(driver);
     }
 
     public String getCartIconCounter() {
