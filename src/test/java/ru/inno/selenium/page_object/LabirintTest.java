@@ -5,15 +5,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import ru.inno.selenium.page_object.ext.CartPageResolver;
 import ru.inno.selenium.page_object.ext.MainPageResolver;
 import ru.inno.selenium.page_object.ext.SearchResultPageResolver;
+import ru.inno.selenium.page_object.ext.WebDriverInitializr;
 import ru.inno.selenium.page_object.page.CartPage;
 import ru.inno.selenium.page_object.page.MainPage;
 import ru.inno.selenium.page_object.page.SearchResultPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(CartPageResolver.class)
 @ExtendWith(MainPageResolver.class)
 @ExtendWith(SearchResultPageResolver.class)
-@ExtendWith(CartPageResolver.class)
+@ExtendWith(WebDriverInitializr.class)
 public class LabirintTest {
 
 

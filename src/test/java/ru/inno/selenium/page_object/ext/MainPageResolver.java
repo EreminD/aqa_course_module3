@@ -1,14 +1,17 @@
 package ru.inno.selenium.page_object.ext;
 
-import org.junit.jupiter.api.extension.*;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.api.extension.ParameterResolutionException;
+import org.junit.jupiter.api.extension.ParameterResolver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.inno.selenium.page_object.page.MainPage;
 
-public class MainPageResolver implements ParameterResolver, BeforeEachCallback, AfterEachCallback {
+import static ru.inno.selenium.page_object.ext.WebDriverInitializr.WD_KEY;
 
-    private WebDriver driver;
-    public static final org.junit.jupiter.api.extension.ExtensionContext.Namespace namespace = ExtensionContext.Namespace.create("my_store");
+public class MainPageResolver implements ParameterResolver {
+
 
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
@@ -17,20 +20,14 @@ public class MainPageResolver implements ParameterResolver, BeforeEachCallback, 
 
     @Override
     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        WebDriver driver =
+                extensionContext
+                        .getStore(WebDriverInitializr.namespace)
+                        .getOrComputeIfAbsent(WD_KEY, (s) -> new ChromeDriver(), WebDriver.class);
+
+
         return new MainPage(driver);
     }
 
-    @Override
-    public void afterEach(ExtensionContext context) throws Exception {
-        if (driver != null) {
-            driver.quit();
-            context.getStore(namespace).remove("driver");
-        }
-    }
 
-    @Override
-    public void beforeEach(ExtensionContext context) throws Exception {
-        driver = new ChromeDriver();
-        context.getStore(namespace).put("driver", driver);
-    }
 }
