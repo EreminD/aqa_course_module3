@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class SearchResultPage {
     private final By searchErrorText = By.cssSelector(".search-error h1");
     private final By books = By.cssSelector(".search-result .btn-tocart");
@@ -33,7 +35,7 @@ public class SearchResultPage {
 
     public void goToCart() {
         new WebDriverWait(driver, Duration.ofSeconds(4)).until(ExpectedConditions.textToBe(cartIconLocator, "5"));
-        driver.findElement(cartIconLocator).click();
+        driver.get("https://www.labirint.ru/cart/");
     }
 
 

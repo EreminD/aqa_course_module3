@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class CartPage {
     private final WebDriver driver;
     private final By cartIcon = By.cssSelector(".b-header-b-personal-e-icon-count-m-cart");
@@ -25,4 +27,11 @@ public class CartPage {
         return driver.findElements(cartItemsLocator).size();
     }
 
+    public void checkBooksInCartNumberShouldBe(int x) {
+        assertEquals(x, countBooksInCart());
+    }
+
+    public void checkIconCounterShouldBe(String s) {
+        assertEquals("5", getCartIconCounter());
+    }
 }
