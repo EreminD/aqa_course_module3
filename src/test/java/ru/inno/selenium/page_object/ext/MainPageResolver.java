@@ -6,9 +6,9 @@ import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import ru.inno.selenium.page_object.page.MainPage;
+import ru.inno.selenium.page_object.pom.pages.MainPage;
 
-import static ru.inno.selenium.page_object.ext.WebDriverInitializr.WD_KEY;
+import static ru.inno.selenium.page_object.ext.WebDriverShutter.WD_KEY;
 
 public class MainPageResolver implements ParameterResolver {
 
@@ -22,7 +22,7 @@ public class MainPageResolver implements ParameterResolver {
     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
         WebDriver driver =
                 extensionContext
-                        .getStore(WebDriverInitializr.namespace)
+                        .getStore(WebDriverShutter.namespace)
                         .getOrComputeIfAbsent(WD_KEY, (s) -> new ChromeDriver(), WebDriver.class);
 
 

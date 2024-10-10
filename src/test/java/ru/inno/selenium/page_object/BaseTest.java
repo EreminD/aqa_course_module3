@@ -5,9 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import ru.inno.selenium.page_object.page.CartPage;
-import ru.inno.selenium.page_object.page.MainPage;
-import ru.inno.selenium.page_object.page.SearchResultPage;
+import ru.inno.selenium.page_object.pom.pages.CartPage;
+import ru.inno.selenium.page_object.pom.pages.MainPage;
+import ru.inno.selenium.page_object.pom.pages.SearchResultPage;
 
 import java.time.Duration;
 

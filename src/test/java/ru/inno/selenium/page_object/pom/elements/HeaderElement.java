@@ -1,4 +1,4 @@
-package ru.inno.selenium.page_object.page;
+package ru.inno.selenium.page_object.pom.elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

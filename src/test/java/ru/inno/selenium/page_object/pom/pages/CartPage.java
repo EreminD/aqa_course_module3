@@ -1,9 +1,11 @@
-package ru.inno.selenium.page_object.page;
+package ru.inno.selenium.page_object.pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.inno.selenium.page_object.pom.elements.HeaderElement;
 
 import java.time.Duration;
 
@@ -22,7 +24,8 @@ public class CartPage {
     }
 
     public String getCartIconCounter() {
-        return driver.findElement(cartIcon).getText();
+        WebElement element = driver.findElement(cartIcon);
+        return element.getText();
     }
 
     public int countBooksInCart() {

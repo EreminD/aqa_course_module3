@@ -1,7 +1,8 @@
-package ru.inno.selenium.page_object.page;
+package ru.inno.selenium.page_object.pom.pages;
 
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import ru.inno.selenium.page_object.pom.elements.HeaderElement;
 
 public class MainPage {
     private final WebDriver driver;
