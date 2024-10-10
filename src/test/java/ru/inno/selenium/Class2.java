@@ -1,11 +1,14 @@
 package ru.inno.selenium;
 
-import org.openqa.selenium.WebElement;
-
 public class Class2 {
 
+    public static void main(String[] args) {
+        Class0 c0 = new Class0();
 
-    public static void clickButton(WebElement element){
-        element.click();
+        c0.prop1 = new Class1();
+
+        String text = c0.prop1.getText();
+        System.out.println(text);
     }
+
 }

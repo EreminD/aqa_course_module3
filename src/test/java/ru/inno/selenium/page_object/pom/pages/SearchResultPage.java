@@ -1,8 +1,9 @@
 package ru.inno.selenium.page_object.pom.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import ru.inno.selenium.page_object.pom.elements.BookCard;
 import ru.inno.selenium.page_object.pom.elements.HeaderElement;
 
@@ -10,18 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultPage {
-    private final WebDriver driver;
+
     public final HeaderElement header;
-    private final By searchErrorText = By.cssSelector(".search-error h1");
-    private final By books = By.cssSelector(".product-card");
+    @FindBy(css = ".search-error h1")
+    private WebElement searchErrorText;
+    @FindBy(css = ".product-card")
+    private List<WebElement> books;
 
     public SearchResultPage(WebDriver driver) {
-        this.driver = driver;
+        PageFactory.initElements(driver, this);
         this.header = new HeaderElement(driver);
     }
 
     public String getErrorText() {
-        return driver.findElement(searchErrorText).getText();
+        return searchErrorText.getText();
     }
 
     public void addBooksToCart(int count) {
@@ -34,8 +37,7 @@ public class SearchResultPage {
     public List<BookCard> getBooks() {
         List<BookCard> result = new ArrayList<>();
 
-        List<WebElement> elements = driver.findElements(books); // 60
-        elements.forEach(e -> result.add(new BookCard(e)));
+        books.forEach(e -> result.add(new BookCard(e)));
 
         return result; // 60
     }

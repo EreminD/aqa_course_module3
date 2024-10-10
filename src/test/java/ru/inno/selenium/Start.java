@@ -14,8 +14,6 @@ public class Start {
         WebElement sendMessageToMax = driver_1.findElement(By.cssSelector(""));
         WebElement sendMessageToSam = driver_2.findElement(By.cssSelector(""));
 
-        Class2.clickButton(sendMessageToMax);
-        Class2.clickButton(sendMessageToSam);
 
         if (driver_1 != null) {
             driver_1.quit();

@@ -2,6 +2,7 @@ package ru.inno.selenium.page_object.pom.pages;
 
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import ru.inno.selenium.page_object.pom.elements.HeaderElement;
 
 public class MainPage {
@@ -10,6 +11,7 @@ public class MainPage {
     protected static final String url = "https://www.labirint.ru/";
 
     public MainPage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
         this.driver = driver;
         this.header = new HeaderElement(driver);
     }
