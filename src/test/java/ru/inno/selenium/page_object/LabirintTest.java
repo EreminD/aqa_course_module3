@@ -6,9 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
+import ru.inno.selenium.page_object.pom.elements.BookCard;
 import ru.inno.selenium.page_object.pom.pages.CartPage;
 import ru.inno.selenium.page_object.pom.pages.MainPage;
 import ru.inno.selenium.page_object.pom.pages.SearchResultPage;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class LabirintTest {
@@ -43,5 +48,23 @@ public class LabirintTest {
         cartPage.header.searchFor("JavaScript");
     }
 
+    @Test
+    public void printBooks() {
+        mainPage.open();
+        mainPage.header.searchFor("Java");
+        List<BookCard> items = searchResultPage.getBooks();
+        System.out.println(items.size());
+        for (BookCard card : items) {
+            System.out.println(card.getTitle() + " – " + card.getPrice());
+        }
+    }
+
+    @Test
+    public void emptySearch() {
+        mainPage.open();
+        mainPage.header.searchFor("вапвроплроавыпинртивапиваип");
+
+        assertEquals("Мы ничего не нашли по вашему запросу! Что делать?", searchResultPage.getErrorText());
+    }
 
 }
