@@ -1,5 +1,6 @@
 package ru.inno.selenium.page_object.pom.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +28,7 @@ public class SearchResultPage {
         return searchErrorText.getText();
     }
 
+    @Step("добавить в корзину {0} товаров")
     public void addBooksToCart(int count) {
         List<BookCard> bookCards = getBooks();
         for (int i = 0; i < count; i++) {
@@ -36,7 +38,6 @@ public class SearchResultPage {
 
     public List<BookCard> getBooks() {
         List<BookCard> result = new ArrayList<>();
-
         books.forEach(e -> result.add(new BookCard(e)));
 
         return result; // 60

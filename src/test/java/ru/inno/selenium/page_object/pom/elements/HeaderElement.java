@@ -1,5 +1,6 @@
 package ru.inno.selenium.page_object.pom.elements;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,12 +19,25 @@ public class HeaderElement {
         this.driver = driver;
     }
 
+    private WebElement form;
+    @Step("Выполнить поиск по слову {term}")
     public void searchFor(String term) {
-        WebElement form = driver.findElement(formLocator);
+        form = driver.findElement(formLocator);
+        typeTermIn(term);
+        submitForm();
+    }
+
+    @Step("Ввести поисковый запрос {term}")
+    private void typeTermIn(String term){
         form.findElement(searchInput).sendKeys(term);
+    }
+
+    @Step("Нажать Enter")
+    private void submitForm(){
         form.submit();
     }
 
+    @Step("Перейти в корзину")
     public void goToCart() {
         new WebDriverWait(driver, Duration.ofSeconds(4)).until(ExpectedConditions.textToBe(cartIconLocator, "5"));
         driver.get("https://www.labirint.ru/cart/");

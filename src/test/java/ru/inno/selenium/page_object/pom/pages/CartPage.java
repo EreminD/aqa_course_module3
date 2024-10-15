@@ -1,6 +1,9 @@
 package ru.inno.selenium.page_object.pom.pages;
 
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -25,6 +28,9 @@ public class CartPage {
     @FindBy(css = ".main_order-container div.need-watch")
     private List<WebElement> cartItems;
 
+    @FindBy(css = ".products-row")
+    private WebElement itemsList;
+
     public CartPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
 
@@ -41,11 +47,19 @@ public class CartPage {
         return cartItems.size();
     }
 
+    @Step("Проверить, что в корзине лежит {x} товаров")
     public void checkBooksInCartNumberShouldBe(int x) {
+        takeScreen(itemsList);
         assertEquals(x, countBooksInCart());
     }
 
+    @Attachment(type = "image/png", value = "cart", fileExtension = ".png")
+    private byte[] takeScreen(WebElement element){
+        return element.getScreenshotAs(OutputType.BYTES);
+    }
+
+    @Step("Проверить, что счетчик товаров в корзине равен {s}")
     public void checkIconCounterShouldBe(String s) {
-        assertEquals("5", getCartIconCounter());
+        assertEquals(s, getCartIconCounter());
     }
 }

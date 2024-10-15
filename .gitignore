@@ -4,3 +4,4 @@ target
 *.html
 *.crx
 allure-results
+allure-report
