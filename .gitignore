@@ -5,3 +5,4 @@ target
 *.crx
 allure-results
 allure-report
+build
