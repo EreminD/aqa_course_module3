@@ -1,4 +1,4 @@
-package ru.inno.selenium.webelement_interface;
+package ru.inno.selenium.page_object.webelement_interface;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

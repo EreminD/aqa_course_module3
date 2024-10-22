@@ -1,31 +1,29 @@
 package ru.inno.selenium.page_object.pom.pages;
 
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import ru.inno.selenium.page_object.pom.elements.BookCard;
 import ru.inno.selenium.page_object.pom.elements.HeaderElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+
 public class SearchResultPage {
 
     public final HeaderElement header;
-    @FindBy(css = ".search-error h1")
-    private WebElement searchErrorText;
-    @FindBy(css = ".product-card")
-    private List<WebElement> books;
+    private final SelenideElement searchErrorText = $(".search-error h1");
+    private ElementsCollection books = $$(".product-card");
 
-    public SearchResultPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.header = new HeaderElement(driver);
+    public SearchResultPage() {
+        this.header = new HeaderElement();
     }
 
     public String getErrorText() {
-        return searchErrorText.getText();
+        return searchErrorText.text();
     }
 
     @Step("добавить в корзину {0} товаров")

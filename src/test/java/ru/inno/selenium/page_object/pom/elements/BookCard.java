@@ -1,5 +1,6 @@
 package ru.inno.selenium.page_object.pom.elements;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -9,22 +10,22 @@ public class BookCard {
     private final By likeLocator = By.cssSelector("a.btn-like");
     private final By tocartLocator = By.cssSelector("a.btn-tocart");
 
-    private final WebElement context;
+    private final SelenideElement context;
 
-    public BookCard(WebElement whereToSearch) {
+    public BookCard(SelenideElement whereToSearch) {
         this.context = whereToSearch;
     }
 
     public void addToCart() {
-        context.findElement(tocartLocator).click();
+        context.find(tocartLocator).click();
     }
 
     public String getTitle() {
-        return context.findElement(titleLocator).getText();
+        return context.find(titleLocator).text();
     }
 
     public String getPrice() {
-        return context.findElement(priceLocator).getText();
+        return context.find(priceLocator).text();
     }
 
 }

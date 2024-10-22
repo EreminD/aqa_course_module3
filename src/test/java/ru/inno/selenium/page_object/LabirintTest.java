@@ -1,11 +1,8 @@
 package ru.inno.selenium.page_object;
 
+import com.codeborne.selenide.Configuration;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
 import ru.inno.selenium.page_object.pom.elements.BookCard;
 import ru.inno.selenium.page_object.pom.pages.CartPage;
 import ru.inno.selenium.page_object.pom.pages.MainPage;
@@ -21,24 +18,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DisplayName("Тесты на лабиринт")
 @Owner("Еремин Д")
 public class LabirintTest {
-    private WebDriver driver;
+
     MainPage mainPage;
     SearchResultPage searchResultPage;
     CartPage cartPage;
 
-    @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
-        mainPage = new MainPage(driver);
-        searchResultPage = new SearchResultPage(driver);
-        cartPage = PageFactory.initElements(driver, CartPage.class);
+    @BeforeAll
+    public static void setUpGlobal(){
+        Configuration.baseUrl = "https://www.labirint.ru";
     }
 
-    @AfterEach
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+    @BeforeEach
+    public void setUp() {
+        mainPage = new MainPage();
+        searchResultPage = new SearchResultPage();
+        cartPage = new CartPage();
     }
 
     @Test
@@ -89,22 +83,6 @@ public class LabirintTest {
         mainPage.header.searchFor("вапвроплроавыпинртивапиваип");
 
         step("Проверить корректность сообщения о пустом результате", () -> assertEquals("Мы ничего не нашли по вашему запросу! Что делать?", searchResultPage.getErrorText(), "Неправильный текст ошибки"));
-    }
-
-    @Test
-    public void simpleScript() {
-
-        String textToBe = "Книги, которые создали меня. Писатели рассказывают о своем читательском опыте";
-        step("Открыть главную", () -> {
-            mainPage.open();
-        });
-        step("Кликнуть на ссылку Рекомендуем", () -> driver.findElement(By.cssSelector(".b-header-b-logo-e-discount-e-text-m-long")).click());
-
-        String text = driver.findElement(By.cssSelector(".b-goodssets-head-e-title")).getText();
-
-        step("Проверить, что отображается текст " + textToBe, () -> assertEquals(textToBe, text));
-
-
     }
 
 }

@@ -38,9 +38,9 @@ public abstract class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 
-        mainPage = new MainPage(driver);
-        searchResultPage = new SearchResultPage(driver);
-        cartPage = new CartPage(driver);
+        mainPage = new MainPage();
+        searchResultPage = new SearchResultPage();
+        cartPage = new CartPage();
     }
 
     @AfterEach
