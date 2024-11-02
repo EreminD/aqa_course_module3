@@ -20,7 +20,12 @@ pipeline {
         }
         stage('Test'){
             steps {
-                sh 'mvn clean test -Dtest=LabirintTest'
+                sh 'mvn clean test \
+                -Dtest=LabirintTest \
+                -Dselenide.browserVersion=${version} \
+                -Dselenide.browser=${browser} \
+                -Dselenide.remote=${hub} \
+                -Dselenide.baseUrl=${baseUrl} '
             }
         }
     }

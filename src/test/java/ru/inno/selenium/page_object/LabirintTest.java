@@ -27,12 +27,6 @@ public class LabirintTest {
 
     @BeforeAll
     public static void setUpGlobal() {
-
-        Configuration.baseUrl = "https://www.labirint.ru";
-        Configuration.remote = "http://127.0.0.1:4444/wd/hub";
-        Configuration.browser = "chrome";
-        Configuration.browserVersion = "128";
-
         ChromeOptions options = new ChromeOptions();
         options.setCapability("selenoid:options", new HashMap<String, Object>() {
             {
