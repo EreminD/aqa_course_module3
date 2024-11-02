@@ -6,3 +6,4 @@ target
 allure-results
 allure-report
 build
+/.gigaide/gigaide.properties
