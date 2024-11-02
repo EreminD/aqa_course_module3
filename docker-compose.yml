@@ -1,12 +1,12 @@
 #docker network create selenoid
 
 networks:
-  selenoid:
-    external: true
+  jenkins:
+      external: true
 services:
   selenoid:
     networks:
-      selenoid: null
+      jenkins: null
     image: aerokube/selenoid:latest-release
     volumes:
       - "./config:/etc/selenoid"
@@ -21,7 +21,7 @@ services:
 
   selenoid_ui:
     networks:
-      selenoid: null
+      jenkins: null
     image: aerokube/selenoid-ui:latest
     command: ["--selenoid-uri", "http://selenoid:4444"]
     ports:
