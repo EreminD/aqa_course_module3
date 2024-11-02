@@ -18,6 +18,11 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
+        stage('Start Selenoid') {
+            steps {
+                sh 'docker compose up'
+            }
+        }
         stage('Test'){
             steps {
                 sh 'mvn clean test \
@@ -32,6 +37,7 @@ pipeline {
     post {
         always {
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+            sh 'docker compose down'
         }
     }
 }
