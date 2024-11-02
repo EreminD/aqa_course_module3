@@ -3,11 +3,13 @@ package ru.inno.selenium.page_object;
 import com.codeborne.selenide.Configuration;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.chrome.ChromeOptions;
 import ru.inno.selenium.page_object.pom.elements.BookCard;
 import ru.inno.selenium.page_object.pom.pages.CartPage;
 import ru.inno.selenium.page_object.pom.pages.MainPage;
 import ru.inno.selenium.page_object.pom.pages.SearchResultPage;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static io.qameta.allure.Allure.step;
@@ -24,8 +26,25 @@ public class LabirintTest {
     CartPage cartPage;
 
     @BeforeAll
-    public static void setUpGlobal(){
+    public static void setUpGlobal() {
+
         Configuration.baseUrl = "https://www.labirint.ru";
+        Configuration.remote = "http://127.0.0.1:4444/wd/hub";
+        Configuration.browser = "chrome";
+        Configuration.browserVersion = "128";
+
+        ChromeOptions options = new ChromeOptions();
+        options.setCapability("selenoid:options", new HashMap<String, Object>() {
+            {
+                /* How to add test badge */
+                put("name", "Test badge...");
+
+                put("enableVNC", true);
+                /* How to set session timeout */
+                put("sessionTimeout", "15m");
+            }
+        });
+        Configuration.browserCapabilities = options;
     }
 
     @BeforeEach
